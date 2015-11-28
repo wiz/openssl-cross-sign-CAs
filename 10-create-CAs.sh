@@ -10,13 +10,14 @@ initCAdirs()
 	touch ${CA}/index.txt.attr
 }
 
-createCAkey()
+generateCAkey()
 {
 	CA=$1
-	openssl genrsa -aes256 -out ${CA}/private/ca.key.pem 4096
+	MODLEN=$2
+	openssl genrsa -aes256 -out ${CA}/private/ca.key.pem ${MODLEN}
 }
 
-createCAcert()
+selfSignCAcert()
 {
 	CA=$1
 	openssl req -config ${CA}-openssl.cnf \
@@ -28,11 +29,10 @@ createCAcert()
 rm -rf CA1 CA2
 
 initCAdirs "CA1"
-createCAkey "CA1"
-createCAcert "CA1"
-
+generateCAkey "CA1" 1024
+selfSignCAcert "CA1"
 
 initCAdirs "CA2"
-createCAkey "CA2"
-createCAcert "CA2"
+generateCAkey "CA2" 4096
+selfSignCAcert "CA2"
 

@@ -147,7 +147,7 @@ organizationalUnitName		= Organizational Unit Name (eg, section)
 organizationalUnitName_default	= Testing Dept.
 
 commonName			= Common Name (e.g. server FQDN or YOUR name)
-#commonName_default	= CA1
+commonName_default	= CA1
 commonName_max			= 64
 
 emailAddress			= Email Address
@@ -237,14 +237,14 @@ authorityKeyIdentifier=keyid:always,issuer
 
 # This is what PKIX recommends but some broken software chokes on critical
 # extensions.
-#basicConstraints = critical,CA:true
+basicConstraints = critical,CA:true
 # So we do this instead.
-basicConstraints = CA:true
+#basicConstraints = CA:true
 
 # Key usage: this is typical for a CA certificate. However since it will
 # prevent it being used as an test self-signed certificate it is best
 # left out by default.
-# keyUsage = cRLSign, keyCertSign
+keyUsage = cRLSign, keyCertSign
 
 # Some might want this also
 # nsCertType = sslCA, emailCA
