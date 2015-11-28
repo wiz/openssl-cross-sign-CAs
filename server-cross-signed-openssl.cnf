@@ -39,7 +39,7 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir		= ./CA2		# Where everything is kept
+dir		= ./server-cross-signed		# Where everything is kept
 certs		= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl		# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.
@@ -147,7 +147,7 @@ organizationalUnitName		= Organizational Unit Name (eg, section)
 organizationalUnitName_default	= Testing Dept.
 
 commonName			= Common Name (e.g. server FQDN or YOUR name)
-commonName_default	= CA2
+commonName_default	= server-cross-signed
 commonName_max			= 64
 
 emailAddress			= Email Address

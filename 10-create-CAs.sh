@@ -7,6 +7,7 @@ initCAdirs()
 	mkdir -p ${CA}/{certs,crl,newcerts,private}
 	echo 1000 > ${CA}/serial
 	touch ${CA}/index.txt
+	touch ${CA}/index.txt.attr
 }
 
 createCAkey()
@@ -19,8 +20,8 @@ createCAcert()
 {
 	CA=$1
 	openssl req -config ${CA}-openssl.cnf \
-		-key ${CA}/private/ca.key.pem \
 		-new -x509 -days 3650 -sha256 -extensions v3_ca \
+		-key ${CA}/private/ca.key.pem \
 		-out ${CA}/certs/ca.cert.pem
 }
 
