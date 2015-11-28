@@ -1,0 +1,1 @@
+create both a self-signed CA2 and intermediary CA2, send both of those, and make server certs signed by both of those, and send both of those, why not

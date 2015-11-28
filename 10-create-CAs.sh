@@ -26,6 +26,30 @@ selfSignCAcert()
 		-out ${CA}/certs/ca.cert.pem
 }
 
+signIntermediaryCert()
+{
+	parentCA=$1
+	childCA=$2
+
+	# generate CSR for intermediary cert
+	openssl req -config ${childCA}-openssl.cnf \
+		-new -sha256 \
+		-key ${childCA}/private/ca.key.pem \
+		-out ${childCA}/${childCA}-req-for-${parentCA}.csr.pem
+
+	# sign intermediary cert
+	openssl ca -config ${parentCA}-openssl.cnf \
+		-days 3650 -extensions v3_ca \
+		-keyfile ${parentCA}/private/ca.key.pem \
+		-out ${childCA}/certs/ca.cert.pem \
+		-infiles ${childCA}/${childCA}-req-for-${parentCA}.csr.pem
+
+#	openssl req -config ${childCA}-openssl.cnf \
+#		-new -x509 -days 3650 -sha256 -extensions v3_ca \
+#		-key ${childCA}/private/ca.key.pem \
+#		-out ${childCA}/certs/ca.cert.pem
+}
+
 rm -rf CA1 CA2
 
 initCAdirs "CA1"
@@ -34,5 +58,5 @@ selfSignCAcert "CA1"
 
 initCAdirs "CA2"
 generateCAkey "CA2" 4096
-selfSignCAcert "CA2"
+signIntermediaryCert "CA1" "CA2"
 

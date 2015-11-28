@@ -1,2 +1,1 @@
-cd server-cross-signed
-openssl s_server -accept 1234 -cert combined.cert.pem -CAfile ../CA1/certs/ca.cert.pem -key private.key.pem -chain
+openssl s_server -accept 1234 -cert server-cross-signed/server-cross-signed-CA2.cert.pem -CAfile CA2/certs/ca.cert.pem -key server-cross-signed/private.key.pem -chain

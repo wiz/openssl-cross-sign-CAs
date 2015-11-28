@@ -1,0 +1,10 @@
+OpenSSL's s_server doesn't accept a certificate chain ?! wtf!
+
+% openssl verify -verbose -CAfile ../CA1/certs/ca.cert.pem combined.cert.pem
+combined.cert.pem: OK
+% openssl s_server -accept 1234 -chain -cert combined.cert.pem -key private.key.pem
+Enter pass phrase for private.key.pem:
+Using default temp DH parameters
+Using default temp ECDH parameters
+error setting private key
+43063:error:0B080074:x509 certificate routines:X509_check_private_key:key values mismatch:/BuildRoot/Library/Caches/com.apple.xbs/Sources/OpenSSL098/OpenSSL098-59/src/crypto/x509/x509_cmp.c:406:
